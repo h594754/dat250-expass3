@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateUser() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -16,6 +18,7 @@ export default function CreateUser() {
                     }},)
     
             console.log(response);
+            navigate("/menu", {state: {username: username}});
         } catch(err) {
             console.error("Error creating a new user", err);
         }
