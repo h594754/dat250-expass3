@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 import java.util.List;
 
+//Added cors on controller level instead of on method level.
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 public class PollsController {
     @Autowired

@@ -1,4 +1,5 @@
 import './App.css'
+import CreateUser from './components/CreateUser'
 
 function App() {
 
@@ -7,6 +8,8 @@ function App() {
       <div>
         <p> Hello World!</p>
       </div>
+
+      <CreateUser />
     </>
   )
 }
