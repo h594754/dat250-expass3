@@ -18,7 +18,7 @@ export default function Menu() {
                     <a style={{ color: "blue", textDecoration: "underline" }} onClick={() => navigate("/createpoll", {state: {username: username}})}>Create a poll</a>
                 </li>
                 <li>
-                    <a href="/votePoll">Vote on a poll</a>
+                    <a href="/votepoll">Vote on a poll</a>
                 </li>
             </ul>
         </div>

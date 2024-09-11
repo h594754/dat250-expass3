@@ -17,7 +17,7 @@ export default function CreatePoll() {
     const [presentationOrder3, setPresentationOrder3] = useState(3);
     const [presentationOrder4, setPresentationOrder4] = useState(4);
 
-    const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState(null);
 
     console.log("Create poll user:", username);
 
@@ -60,13 +60,18 @@ export default function CreatePoll() {
             return;
         }
 
+        if(date === null) {
+            alert("You must select a validUntil date before continuing.");
+            return;
+        }
+
 
         try {
             const response = await fetch(`http://localhost:8080/createPoll?username=${encodeURIComponent(username)}`, { 
                 method: "POST", 
                 body: JSON.stringify({
                     question: question, 
-                    validUntil: date.toISOString,
+                    validUntil: date.toISOString(),
                     voteOptions: voteOptions
                 }),
                 headers: {
@@ -74,7 +79,7 @@ export default function CreatePoll() {
                     }},)
     
             console.log(response);
-            navigate("/votePolls", {state: {username: username}});
+            navigate("/votepoll", {state: {username: username}});
         } catch (err) {
             console.error("Error creating a poll: ", err);
         }
@@ -97,7 +102,8 @@ export default function CreatePoll() {
                     showTimeSelect
                     timeFormat="HH:mm:ss"
                     timeIntervals={15}  
-                    dateFormat="yyyy-MM-dd"   
+                    dateFormat="yyyy-MM-dd HH:mm:ss"
+                    timeCaption="Time"  
                 />
             </div>
 

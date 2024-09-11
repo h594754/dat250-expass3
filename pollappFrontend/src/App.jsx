@@ -3,6 +3,7 @@ import './App.css'
 import CreateUser from './components/CreateUser'
 import Menu from './components/Menu'
 import CreatePoll from './components/CreatePoll'
+import VotePoll from './components/VotePoll'
 
 function App() {
 
@@ -12,7 +13,8 @@ function App() {
         <Routes>
           <Route path='/' element={<CreateUser />}></Route>
           <Route path="/menu" element={<Menu />}></Route>
-          <Route path='createpoll' element={<CreatePoll />}></Route>
+          <Route path='/createpoll' element={<CreatePoll />}></Route>
+          <Route path="/votepoll" element={< VotePoll />}></Route>
         </Routes>
         
       </div>
