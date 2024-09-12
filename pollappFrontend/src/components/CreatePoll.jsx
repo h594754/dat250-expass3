@@ -6,7 +6,7 @@ import DatePicker from "react-datepicker";
 export default function CreatePoll() {
     const location = useLocation();
     const navigate = useNavigate();
-    const username = location.state.username;
+    const username = location.state?.username;
     const [question, setQuestion] = useState("");
     const [option1, setOption1] = useState("");
     const [option2, setOption2] = useState(null); 

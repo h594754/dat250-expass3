@@ -1,5 +1,7 @@
 package no.hvl.dat250.expass1.domains;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.Instant;
@@ -13,10 +15,16 @@ public class Polls {
         private String username;
         @JsonProperty
         private String email;
-
-        private List<Vote> votes;
+        @JsonManagedReference
+        private List<Vote> votes = new ArrayList<>();
 
         public User() {}
+
+        public User(String username, String email, List<Vote> votes) {
+            this.username = username;
+            this.email = email;
+            this.votes = new ArrayList<>();
+        }
 
         public String getUsername() {
             return username;
@@ -40,6 +48,14 @@ public class Polls {
 
         public void setVotes(List<Vote> votes) {
             this.votes = votes;
+        }
+
+        public void addVote(Vote vote) {
+            if(vote == null) {
+                System.out.println("The vote is empty");
+                return;
+            }
+            this.votes.add(vote);
         }
 
         @Override
@@ -124,6 +140,7 @@ public class Polls {
     public static class Vote {
         private String voteId;
         private Instant publishedAt;
+        @JsonBackReference
         private User voter;
         private String optionId;
 

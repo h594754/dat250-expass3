@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 export default function VotePoll() {
     const [allPolls, setAllPolls] = useState(null);
     const location = useLocation();
+    const navigate = useNavigate();
     const username = location.state?.username;
     
     useEffect(() => {
@@ -35,9 +36,11 @@ export default function VotePoll() {
     
             console.log(response);
             
+            
         } catch (err) {
-            console.error("Error creating a poll: ", err);
+            console.error("Error voting on a poll: ", err);
         }
+
     }
     
 
@@ -67,6 +70,8 @@ export default function VotePoll() {
             </ul>
         )) : 
         "There are no polls to get"}
+
+        <a style={{color: "blue"}} onClick={() => navigate("/createpoll", {state: {username: username}})}>Click here to create your own poll</a>
     </div>
     )
 

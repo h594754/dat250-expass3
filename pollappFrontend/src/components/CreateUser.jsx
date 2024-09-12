@@ -17,8 +17,18 @@ export default function CreateUser() {
                         "Content-Type": "application/json",
                     }},)
     
-            console.log(response);
-            navigate("/menu", {state: {username: username}});
+            if (response.status === 409) {
+                
+                alert(`Try again, with another username or email`);
+                return; 
+            }
+    
+            if (!response.ok) {
+                alert("There is an internal error, try again later.");
+                throw new Error('Failed to create user');
+            }
+            
+            navigate("/votepoll", {state: {username: username}});
         } catch(err) {
             console.error("Error creating a new user", err);
         }
