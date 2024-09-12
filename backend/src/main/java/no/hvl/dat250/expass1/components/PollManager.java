@@ -68,17 +68,9 @@ public class PollManager {
         poll1.setCreator(user1.getUsername()); // Created by user1
         poll1.setVoteOptions(List.of(option1, option2, option3)); // Add vote options to the poll
 
-        Polls.Poll poll2 = new Polls.Poll();
-        poll2.setId(UUID.randomUUID().toString());
-        poll2.setQuestion("What is your favorite food?");
-        poll2.setPublishedAt(Instant.now());
-        poll2.setValidUntil(Instant.now().plusSeconds(7200)); // Valid for 2 hours
-        poll2.setCreator(user2.getUsername()); // Created by user2
-        poll2.setVoteOptions(new ArrayList<>()); // No vote options for this poll initially
 
         // Add polls to the map
         polls.put(poll1.getId(), poll1);
-        polls.put(poll2.getId(), poll2);
 
         System.out.println("Sample data added");
     }

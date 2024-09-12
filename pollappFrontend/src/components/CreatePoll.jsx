@@ -87,63 +87,88 @@ export default function CreatePoll() {
     }
     
     return (
-        <div>
-            <h2> Your username is {username}</h2>
-            <label>Write your question</label>
-            <div>
-                <input type="text" name="question" onChange={e => setQuestion(e.target.value)} />
-            </div>
-
-            <label>When should it be valid until?</label>
-            <div>
-                <DatePicker
-                    selected={date}
-                    onChange={(date) => setDate(date)}
-                    showTimeSelect
-                    timeFormat="HH:mm:ss"
-                    timeIntervals={15}  
-                    dateFormat="yyyy-MM-dd HH:mm:ss"
-                    timeCaption="Time"  
-                />
-            </div>
-
-        <div>
-
-        <form method="post" onSubmit={handleSubmit}>
-        <label>Add options</label>
-                <ul style={{listStyle: "none"}}>
-                    <li>
-                        <label>Option 1</label>
-                        <div>
-                            <input type="text" name="option1" onChange={e => setOption1(e.target.value)} />
-                            <input type="number" name="presentationOrder1" value={presentationOrder1} onChange={e => setPresentationOrder1(Number(e.target.value))} min="1" max="4" />
-                        </div>
-                    </li>
-                    <li>
-                        <label>Option 2</label>
-                        <div>
-                            <input type="text" name="option2" onChange={e => setOption2(e.target.value)} />
-                            <input type="number" name="presentationOrder2" value={presentationOrder2} onChange={e => setPresentationOrder2(Number(e.target.value))} min="1" max="4" />
-                        </div>
-                    </li>
-                    <li>
-                        <label>Option 3</label>
-                        <div>
-                            <input type="text" name="option3" onChange={e => setOption3(e.target.value)} />
-                            <input type="number" name="presentationOrder3" value={presentationOrder3} onChange={e => setPresentationOrder3(Number(e.target.value))} min="1" max="4" />
-                        </div>
-                    </li>
-                    <li>
-                        <label>Option 4</label>
-                        <div>
-                            <input type="text" name="option4" onChange={e => setOption4(e.target.value)} />
-                            <input type="number" name="presentationOrder4" value={presentationOrder4} onChange={e => setPresentationOrder4(Number(e.target.value))} min="1" max="4" />
-                        </div>
-                    </li>
-                </ul>
-                <button type="submit">Create poll</button>
-                </form>
-            </div>
+        <div style={{ width: "500px", margin: "0 auto", padding: "20px", border: "1px solid #ccc", borderRadius: "10px" }}>
+          <h2 style={{ textAlign: "center" }}>Create a New Poll</h2>
+          <p style={{ textAlign: "center", marginBottom: "20px" }}>Your username: <strong>{username}</strong></p>
+    
+          <label style={{ fontWeight: "bold" }}>Write your question:</label>
+          <div style={{ marginBottom: "20px" }}>
+            <input
+              type="text"
+              name="question"
+              onChange={(e) => setQuestion(e.target.value)}
+              style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
+            />
+          </div>
+    
+          <label style={{ fontWeight: "bold" }}>When should it be valid until?</label>
+          <div style={{ marginBottom: "20px" }}>
+            <DatePicker
+              selected={date}
+              onChange={(date) => setDate(date)}
+              showTimeSelect
+              timeFormat="HH:mm:ss"
+              timeIntervals={15}
+              dateFormat="yyyy-MM-dd HH:mm:ss"
+              timeCaption="Time"
+              style={{ width: "100%" }}
+            />
+          </div>
+    
+          <form method="post" onSubmit={handleSubmit}>
+            <label style={{ fontWeight: "bold", marginBottom: "10px", display: "block" }}>Add options:</label>
+            <ul style={{ listStyle: "none", padding: 0 }}>
+              {[1, 2, 3, 4].map((optionIndex) => (
+                <li key={optionIndex} style={{ marginBottom: "15px" }}>
+                  <label>Option {optionIndex}</label>
+                  <div style={{ display: "flex", justifyContent: "space-between", marginTop: "5px" }}>
+                    <input
+                      type="text"
+                      name={`option${optionIndex}`}
+                      onChange={(e) =>
+                        optionIndex === 1 ? setOption1(e.target.value) :
+                        optionIndex === 2 ? setOption2(e.target.value) :
+                        optionIndex === 3 ? setOption3(e.target.value) : setOption4(e.target.value)
+                      }
+                      style={{ width: "75%", padding: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
+                    />
+                    <input
+                      type="number"
+                      name={`presentationOrder${optionIndex}`}
+                      value={
+                        optionIndex === 1 ? presentationOrder1 :
+                        optionIndex === 2 ? presentationOrder2 :
+                        optionIndex === 3 ? presentationOrder3 : presentationOrder4
+                      }
+                      onChange={(e) =>
+                        optionIndex === 1 ? setPresentationOrder1(Number(e.target.value)) :
+                        optionIndex === 2 ? setPresentationOrder2(Number(e.target.value)) :
+                        optionIndex === 3 ? setPresentationOrder3(Number(e.target.value)) : setPresentationOrder4(Number(e.target.value))
+                      }
+                      min="1"
+                      max="4"
+                      style={{ width: "20%", padding: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
+                    />
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <button
+              type="submit"
+              style={{
+                width: "100%",
+                padding: "10px",
+                backgroundColor: "#007bff",
+                color: "white",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer",
+                marginTop: "20px",
+              }}
+            >
+              Create poll
+            </button>
+          </form>
         </div>
-    )
+      );
 }
